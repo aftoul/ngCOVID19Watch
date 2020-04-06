@@ -9,11 +9,13 @@ export class ScraperService {
   constructor(private http: HttpClient) { }
   private _data: Array<Object> = null;
   public fetching: boolean = false;
+  public error: boolean = false;
   private url: string = 'https://coronavirus-19-api.herokuapp.com/countries';
 
   public get data(){
     if(! this._data && !this.fetching){
       this.refresh();
+      return null;
     }
     return this._data;
   }
@@ -23,11 +25,18 @@ export class ScraperService {
     this.http.get(this.url)
           .subscribe((response: Array<Object>)=> {
             this._data = response;
+            this.error = false;
             this.fetching = false;
+        },
+        ()=> {
+          this.error = true;
+          this.fetching = false;
         });
   }
 
   public get countries(){
+    if(!this.data)
+      return [];
     return this.data.map(
       (obj) => {
         return obj['country'];
@@ -36,6 +45,8 @@ export class ScraperService {
   }
 
   public countryData(country='World'){
+    if(!this.data)
+      return {};
     return this.data.find(
       (obj) => {
         return obj['country']==country;
