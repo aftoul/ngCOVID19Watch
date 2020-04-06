@@ -10,7 +10,7 @@ import { ScraperService } from './scraper.service';
   ]
 })
 export class AppComponent {
-  constructor(private scraper: ScraperService) {}
+  constructor(public scraper: ScraperService) {}
   title = 'COVID-19 Watch';
   private _data = null;
   get data(){
