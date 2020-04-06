@@ -12,8 +12,19 @@ import { ScraperService } from './scraper.service';
 export class AppComponent {
   constructor(private scraper: ScraperService) {}
   title = 'COVID-19 Watch';
-  data = {};
+  private _data = null;
+  get data(){
+    console.log(this._data=={});
+    if(!this._data){
+      if(this.scraper.data){
+        this._data = this.scraper.data[0];
+      }else{
+        return {};
+      }
+    }
+    return this._data;
+  }
   country(c){
-    this.data = this.scraper.countryData(c);
+    this._data = this.scraper.countryData(c);
   }
 }
