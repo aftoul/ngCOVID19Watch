@@ -1,0 +1,27 @@
+
+<div class="col-12 col-md-8 col-lg-6 my-3 p-3 mx-auto border border-info rounded" *ngIf="data&&!scraper.fetching&&!scraper.error">
+<select class="form-control mx-1 my-3 col-10 d-inline-block" id="country" (change)="country($event.target.value)">
+	<option *ngFor="let c of scraper.countries" [value]="c">{{c}}</option>
+</select>
+<button class="col-1 btn btn-light" (click)="scraper.refresh()">&#x21bb;</button>
+<h3 class="text-center col-12">{{"COVID19 " + (data.country=="World"?"worldwide":' in ' + data.country)}}</h3>
+<p> <span>&#x2623;</span> Cases: {{data.cases}}</p>
+<p>
+	<span class="col-5 d-inline-block"><span>&#x2620;</span> Deaths: {{data.deaths}}</span>
+	<span class="col-2">&#x27a4;</span>
+	<span class="col-5 d-inline-block">Mortality rate: {{(data.deaths/data.cases)*100 | number:".0-2"}}%</span>
+</p>
+<p>
+	<span class="col-5 d-inline-block"><span>&#x2695;</span> Recovered: {{data.recovered}}</span>
+	<span class="col-2">&#x27a4;</span>
+	<span class="col-5 d-inline-block">Recovery rate: {{(data.recovered/data.cases)*100 | number:".0-2"}}%</span>
+</p>
+</div>
+<div  *ngIf="scraper.error" class="d-flex flex-row justify-content-center align-items-center" style="height: 100px;">
+	Error loading<br>
+	Click <button class="btn btn-light d-inline-block" (click)="scraper.refresh()">&#x21bb;</button> to reload
+</div>
+<div  *ngIf="scraper.fetching" class="d-flex flex-row justify-content-center align-items-center" style="height: 100px;">
+	Fetching Data...
+</div>
+
