@@ -53,4 +53,18 @@ export class ScraperService {
       }
     );
   }
+
+  public countryFlag(country){
+    var url = 'https://restcountries.eu/rest/v2/name/' + country['country'] + '?fullText=true';
+    this.http.get(url)
+          .subscribe((response: any)=> {
+            country.flag = response[0]['flag'];
+            this.error = false;
+            this.fetching = false;
+        },
+        ()=> {
+          country.flag = null;
+          this.fetching = false;
+        });
+  }
 }

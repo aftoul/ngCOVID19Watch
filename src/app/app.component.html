@@ -4,7 +4,10 @@
 	<option *ngFor="let c of scraper.countries" [value]="c">{{c}}</option>
 </select>
 <button class="col-1 btn btn-light" (click)="scraper.refresh()">&#x21bb;</button>
-<h3 class="text-center col-12">{{"COVID19 " + (data.country=="World"?"worldwide":' in ' + data.country)}}</h3>
+<h3 class="text-center col-12">
+	{{"COVID19 " + (data.country=="World"?"worldwide":' in ' + data.country)}}
+	<img *ngIf="data.flag" [src]="data.flag" id="flag" class="d-inline-block mx-auto">
+</h3>
 <p> <span>&#x2623;</span> Cases: {{data.cases}}</p>
 <p>
 	<span class="col-5 d-inline-block"><span>&#x2620;</span> Deaths: {{data.deaths}}</span>

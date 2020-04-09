@@ -14,10 +14,9 @@ export class AppComponent {
   title = 'COVID-19 Watch';
   private _data = null;
   get data(){
-    console.log(this._data=={});
     if(!this._data){
       if(this.scraper.data){
-        this._data = this.scraper.data[0];
+        this.country(this.scraper.data[0]['country']);
       }else{
         return {};
       }
@@ -26,5 +25,7 @@ export class AppComponent {
   }
   country(c){
     this._data = this.scraper.countryData(c);
+    if(!this._data.flag)
+      this.scraper.countryFlag(this._data);
   }
 }

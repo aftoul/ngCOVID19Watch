@@ -8,3 +8,8 @@
   src: local("Noto Emoji"), local("Noto Color Emoji"), local("Noto"),
        url("https://cdn.rawgit.com/googlei18n/noto-emoji/master/fonts/NotoEmoji-Regular.ttf");
 }
+
+
+img#flag{
+  height: 2rem;
+}
