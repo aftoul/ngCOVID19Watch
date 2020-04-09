@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  font-family: Times,Noto;
+}
+
+@font-face { /* https://www.google.com/get/noto/#noto-emoji-zsye */
+  font-family: Noto;
+  src: local("Noto Emoji"), local("Noto Color Emoji"), local("Noto"),
+       url("https://cdn.rawgit.com/googlei18n/noto-emoji/master/fonts/NotoEmoji-Regular.ttf");
+}
